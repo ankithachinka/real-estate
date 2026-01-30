@@ -32,7 +32,7 @@ app.use('/api/', limiter);
 
 // CORS configuration
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    origin: process.env.FRONTEND_URL || 'http://localhost:8000',
     credentials: true
 }));
 
@@ -140,7 +140,7 @@ app.listen(PORT, () => {
 // Graceful shutdown
 process.on('SIGTERM', () => {
     console.log('SIGTERM received, shutting down gracefully');
-    mongoose.connection.close(() => {
+    mongoose.connection.close().then(() => {
         console.log('MongoDB connection closed');
         process.exit(0);
     });
@@ -148,7 +148,7 @@ process.on('SIGTERM', () => {
 
 process.on('SIGINT', () => {
     console.log('SIGINT received, shutting down gracefully');
-    mongoose.connection.close(() => {
+    mongoose.connection.close().then(() => {
         console.log('MongoDB connection closed');
         process.exit(0);
     });
