@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Real Trust</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="admin-nav">
+            <div class="admin-logo">
+                <img src="assets/images/logo.svg" alt="Real Trust Logo">
+                <span>Real Trust Admin</span>
+            </div>
+            <div class="admin-user">
+                <span>Administrator</span>
+                <button class="logout-btn" onclick="handleLogout()">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#dashboard" class="nav-link active" data-section="dashboard">📊 Dashboard</a></li>
+                    <li><a href="#projects" class="nav-link" data-section="projects">🏢 Projects</a></li>
+                    <li><a href="#clients" class="nav-link" data-section="clients">👥 Clients</a></li>
+                    <li><a href="#contacts" class="nav-link" data-section="contacts">📧 Contact Forms</a></li>
+                    <li><a href="#newsletters" class="nav-link" data-section="newsletters">📰 Newsletter</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="admin-section active">
+                <h2>Dashboard</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Projects</h3>
+                        <p class="stat-number" id="totalProjects">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Clients</h3>
+                        <p class="stat-number" id="totalClients">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Contact Forms</h3>
+                        <p class="stat-number" id="totalContacts">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Newsletter Subscribers</h3>
+                        <p class="stat-number" id="totalNewsletters">0</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="admin-section">
+                <div class="section-header">
+                    <h2>Project Management</h2>
+                    <button class="add-btn" onclick="showAddProjectForm()">+ Add New Project</button>
+                </div>
+                
+                <!-- Add Project Form -->
+                <div id="addProjectForm" class="form-container hidden">
+                    <h3>Add New Project</h3>
+                    <form id="projectForm">
+                        <div class="form-group">
+                            <label for="projectImage">Project Image</label>
+                            <input type="file" id="projectImage" name="image" accept="image/*" required>
+                            <small>Upload project image (JPG, PNG, SVG)</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="projectName">Project Name</label>
+                            <input type="text" id="projectName" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="projectDescription">Project Description</label>
+                            <textarea id="projectDescription" name="description" rows="4" required></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="submit-btn">Add Project</button>
+                            <button type="button" class="cancel-btn" onclick="hideAddProjectForm()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Projects List -->
+                <div class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="projectsTableBody">
+                            <!-- Projects will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Clients Section -->
+            <section id="clients" class="admin-section">
+                <div class="section-header">
+                    <h2>Client Management</h2>
+                    <button class="add-btn" onclick="showAddClientForm()">+ Add New Client</button>
+                </div>
+                
+                <!-- Add Client Form -->
+                <div id="addClientForm" class="form-container hidden">
+                    <h3>Add New Client</h3>
+                    <form id="clientForm">
+                        <div class="form-group">
+                            <label for="clientImage">Client Image</label>
+                            <input type="file" id="clientImage" name="image" accept="image/*" required>
+                            <small>Upload client image (JPG, PNG, SVG)</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="clientName">Client Name</label>
+                            <input type="text" id="clientName" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="clientDescription">Client Description</label>
+                            <textarea id="clientDescription" name="description" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="clientDesignation">Client Designation</label>
+                            <input type="text" id="clientDesignation" name="designation" placeholder="e.g., CEO, Web Developer, Designer" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="submit-btn">Add Client</button>
+                            <button type="button" class="cancel-btn" onclick="hideAddClientForm()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Clients List -->
+                <div class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Designation</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clientsTableBody">
+                            <!-- Clients will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Contact Forms Section -->
+            <section id="contacts" class="admin-section">
+                <h2>Contact Form Details</h2>
+                <div class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Email Address</th>
+                                <th>Mobile Number</th>
+                                <th>City</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="contactsTableBody">
+                            <!-- Contact forms will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Newsletter Section -->
+            <section id="newsletters" class="admin-section">
+                <h2>Subscribed Email Addresses</h2>
+                <div class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Email Address</th>
+                                <th>Subscription Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="newslettersTableBody">
+                            <!-- Newsletter subscribers will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Message Container -->
+    <div id="messageContainer"></div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>
